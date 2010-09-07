@@ -32,9 +32,15 @@ Default: `/heartbeat`
 
 Stethoscope uses _checks_ to check some component of the application.  A check is simply a block that is executed when the heartbeat url is hit.
 
+You don't need any checks.  If you don't include one, Stethoscope will respond if the application is running.
+
+If you do want to check some other pieces of your stack, checks is where it's at.
+
 A response hash is made available to store any information which is then made available to the heartbeat template.
 
 Returning a response _:status_ outside 200..299 will trigger Stethoscope to return a 500 status code to the client.
+
+
 
 #### Example
 
