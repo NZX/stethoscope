@@ -1,5 +1,6 @@
 require 'dictionary'
 require 'tilt'
+require 'stethoscope/rails'
 
 # Stethoscope is Rack middleware that provides a heartbeat function to an application.
 #
