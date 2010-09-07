@@ -1,0 +1,35 @@
+PATH
+  remote: .
+  specs:
+    stethoscope (0.0.1)
+      dictionary (>= 1.0)
+      rack (> 1.0)
+      tilt (>= 1.0)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    dictionary (1.0.0)
+    nanotest (0.9.4.1)
+    nanotest_extensions (0.6.3)
+    rack (1.2.1)
+    rack-test (0.5.4)
+      rack (>= 1.0)
+    rake (0.8.7)
+    rspec-core (2.0.0.beta.20)
+    tilt (1.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (>= 1.0.0)
+  dictionary (>= 1.0)
+  nanotest
+  nanotest_extensions
+  rack (> 1.0)
+  rack-test
+  rake
+  rspec-core (>= 2.0.0.beta.20)
+  stethoscope!
+  tilt (>= 1.0)

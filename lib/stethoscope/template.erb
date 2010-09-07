@@ -1,0 +1,39 @@
+<!Doctype html>
+<html>
+  <head>
+    <title>Heartbeat</title>
+  </head>
+  <body>
+    <h1>Heartbeat (Ba-Boomp)</h1>
+    <div class='results'>
+      <% if checks.empty? %>
+        <p class='error'>No Checks Enabled</p>
+      <% else %>
+        <ul class='checks'>
+        <% checks.each do |name, hash| %>
+          <li>
+            <strong><%= name %>:<strong>
+            <ul>
+              <% hash.each do |item, value| %>
+                <li>
+                  <% if item.to_s == 'error' %>
+                    <h4><%= item.class %></h4>
+                    <p class='error-message'><%= value.message %></p>
+                    <ul class='stack-trace'>
+                      <% value.backtrace.each do |line| %>
+                        <li><%= line %></li>
+                      <% end %>
+                  <% else %>
+                    <strong><%= item %>:</strong> <%= value %>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      <% end %>
+    </div>
+  </body>
+</html>
+
+
