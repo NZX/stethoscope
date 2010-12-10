@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    stethoscope (0.0.1)
+    stethoscope (0.1.3)
       dictionary (>= 1.0)
       rack (> 1.0)
       tilt (>= 1.0)
