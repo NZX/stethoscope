@@ -1,5 +1,6 @@
 require 'dictionary'
 require 'tilt'
+require 'json'
 require 'stethoscope/rails'
 
 # Stethoscope is Rack middleware that provides a heartbeat function to an application.
@@ -110,28 +111,40 @@ class Stethoscope
 
   def call(env)
     request = Rack::Request.new(env)
-    if request.path == Stethoscope.url
-      responses  = Dictionary.new do |d,k|
-        dict = Dictionary.new
-        dict[:status] = 200
-        d[k] = dict
-      end
-
-      Stethoscope.checks.each do |name, check|
-        begin
-          check.call(responses[name])
-        rescue => e
-          responses[name][:error]  = e
-          responses[name][:status] = 500
-        end
-      end
-
-      status = responses.any?{ |k,v| v[:status] && !((200..299).include?(v[:status])) } ? 500 : 200
-      result = Stethoscope.template.render(Object.new, :checks => responses)
-
-      Rack::Response.new(result, status).finish
-    else
-      @app.call(env)
+    return @app.call(env) unless check_heartbeat?(request.path)
+    responses = Hash.new do |h,k|
+      h[k] = {:status => 200}
     end
+
+    Stethoscope.checks.each do |name, check|
+      begin
+        check.call(responses[name])
+      rescue => e
+        responses[name][:error]  = e
+        responses[name][:status] = 500
+      end
+    end
+
+    status = responses.any?{ |k,v| v[:status] && !((200..299).include?(v[:status])) } ? 500 : 200
+    _format = format(request.path)
+
+    case format(request.path)
+    when :html
+      result = Stethoscope.template.render(Object.new, :checks => responses)
+    when :json
+      result = {:checks => responses, :status => status}.to_json
+    end
+
+    Rack::Response.new(result, status).finish
+  end
+
+  private
+  def check_heartbeat?(path)
+    path == self.class.url || path == (self.class.url + '.json')
+  end
+
+  def format(path)
+    return :json if path == (self.class.url + '.json')
+    :html
   end
 end

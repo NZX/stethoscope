@@ -10,11 +10,11 @@
         <p class='error'>No Checks Enabled</p>
       <% else %>
         <ul class='checks'>
-        <% checks.each do |name, hash| %>
+        <% checks.each do |(name, hash)| %>
           <li>
             <strong><%= name %>:</strong>
             <ul>
-              <% hash.each do |item, value| %>
+              <% hash.each do |(item, value)| %>
                 <li>
                   <% if item.to_s == 'error' %>
                     <h4><%= item.class %></h4>

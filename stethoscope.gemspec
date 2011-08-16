@@ -14,9 +14,9 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "stethoscope"
 
-  s.add_dependency              "rack",        ">  1.0"
-  s.add_dependency              "dictionary",  ">= 1.0"
-  s.add_dependency              "tilt",        ">= 1.0"
+  s.add_dependency              "rack",          ">  1.0"
+  s.add_dependency              "dictionary",    ">= 1.0"
+  s.add_dependency              "tilt",          ">= 1.0"
 
   s.add_development_dependency  "bundler",     ">= 1.0.0"
   s.add_development_dependency  "rspec-core",  ">= 2.0.0.beta.20"
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency  "nanotest_extensions"
   s.add_development_dependency  "rake"
   s.add_development_dependency  "rack-test"
+  s.add_development_dependency  'json_pure'
 
 
   s.files        = `git ls-files`.split("\n")

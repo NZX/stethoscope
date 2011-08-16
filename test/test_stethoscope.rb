@@ -37,6 +37,18 @@ class TestStethoscope
       assert {response.body.to_s =~ /Ba-Boomp/ }
     end
 
+    test do
+      Stethoscope.check(:foo){ |response| response[:status] = 200; response[:test1] = :test1 }
+      Stethoscope.check(:bar){ |response| response[:status] = 200; response[:test2] = :test2 }
+
+      response = get "/heartbeat.json"
+      assert { response.status == 200    }
+      assert { response.body !~ /default/ }
+      result = JSON.parse(response.body)
+      assert { result['status'] == 200 }
+      assert { result['checks'] == {'foo' => {'status' => 200, 'test1' => 'test1'}, 'bar' => {'status' => 200, 'test2' => 'test2'} } }
+    end
+
     # Check checks
     context do
       setup    { $captures = []  }
