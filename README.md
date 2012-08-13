@@ -67,10 +67,14 @@ Any exceptions are caught and added to the response with the _:error_ key.  The 
   * Check name - :database
   * require 'stethoscope/checks/data\_mapper'
   * Included if the DataMapper constant is present in Rails 3
-* Mongoid
+* Mongoid 2.x
+  * Check name - :database
+  * require 'stethoscope/checks/mongoid2'
+  * Included if the Mongoid constant is present in Rails 3
+* Mongoid 3.x
   * Check name - :database
   * require 'stethoscope/checks/mongoid'
-  * Included if the Mongoid constant is present in Rails 3
+  * Included if the Mongoid and Moped constants are present in Rails 3
 
 ### Template
 
