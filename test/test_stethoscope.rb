@@ -25,6 +25,7 @@ class TestStethoscope
     test do
       response = get "/heartbeat"
       assert { response.status == 200 }
+      assert { response.headers['Content-Type'] == 'text/html' }
       assert { response.body.to_s =~ /Ba-Boomp/ }
     end
 
@@ -42,7 +43,8 @@ class TestStethoscope
       Stethoscope.check(:bar){ |response| response[:status] = 200; response[:test2] = :test2 }
 
       response = get "/heartbeat.json"
-      assert { response.status == 200    }
+      assert { response.status == 200 }
+      assert { response.headers['Content-Type'] == 'application/json' }
       assert { response.body !~ /default/ }
       result = JSON.parse(response.body)
       assert { result['status'] == 200 }

@@ -128,14 +128,17 @@ class Stethoscope
     status = responses.any?{ |k,v| v[:status] && !((200..299).include?(v[:status])) } ? 500 : 200
     _format = format(request.path)
 
+    headers = { 'Content-Type' => 'text/html' }
+
     case format(request.path)
     when :html
       result = Stethoscope.template.render(Object.new, :checks => responses)
     when :json
       result = {:checks => responses, :status => status}.to_json
+      headers['Content-Type'] = 'application/json'
     end
 
-    Rack::Response.new(result, status).finish
+    Rack::Response.new(result, status, headers).finish
   end
 
   private
