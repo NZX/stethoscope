@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Daniel Neighman']
   s.email       = ['has.sox@gmail.com']
-  s.homepage    = "http://rubygems.org/gems/stethoscope"
+  s.homepage    = "http://github.com/hassox/stethoscope"
   s.summary     = "Heartbeat middleware for responding to heartbeat pings"
   s.description = "Heartbeat middleware for responding to heartbeat pings"
 
