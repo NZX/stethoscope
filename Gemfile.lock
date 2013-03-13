@@ -7,7 +7,7 @@ PATH
       tilt (>= 1.0)
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     dictionary (1.0.0)
     json_pure (1.5.3)
