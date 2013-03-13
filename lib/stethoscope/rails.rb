@@ -7,6 +7,10 @@ if defined?(Rails::Railtie)
 
         require 'stethoscope/checks/active_record' if defined?(ActiveRecord)
         require 'stethoscope/checks/data_mapper'   if defined?(DataMapper)
+        if defined?(Mongoid)
+          mongoid_check = defined?(Moped) ? "mongoid3" : "mongoid2"
+          require "stethoscope/checks/#{mongoid_check}"
+        end
       end
     end
   end
